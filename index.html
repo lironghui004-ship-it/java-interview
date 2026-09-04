@@ -237,10 +237,10 @@ main::-webkit-scrollbar{width:0;height:0}
 .md ul,.md ol{margin:0 0 16px;padding-left:24px}
 .md ul{list-style:square}
 .md li{margin:8px 0}
-.md code{background:var(--paper-2);padding:2px 7px;font-size:15.5px;border-bottom:2px dashed var(--bd);
+.md code{background:var(--paper-2);padding:2px 6px;font-size:14px;border-bottom:1.5px dashed var(--bd);
   font-family:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;color:var(--no)}
-.md pre{background:var(--code-bg);color:var(--code-text);border:2px dashed var(--code-bd);
-  padding:16px 20px;overflow-x:auto;margin:0 0 18px;font-size:15.5px;line-height:1.8;box-shadow:var(--s2);
+.md pre{background:var(--code-bg);color:var(--code-text);border:1.5px dashed var(--code-bd);
+  padding:14px 18px;overflow-x:auto;margin:0 0 18px;font-size:14px;line-height:1.75;box-shadow:var(--s2);
   font-family:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
   -webkit-overflow-scrolling:touch}
 .md pre code{background:none;padding:0;border:none;color:inherit;font-size:inherit;line-height:inherit;font-family:inherit}
@@ -249,7 +249,7 @@ main::-webkit-scrollbar{width:0;height:0}
 .md table{border-collapse:collapse;margin:0 0 16px;font-size:14.5px;display:block;overflow-x:auto;white-space:nowrap}
 .md th,.md td{border:2px dashed var(--bd);padding:8px 12px;text-align:left}
 .md th{background:var(--paper-2);font-weight:700}
-.md a{color:var(--ink);text-decoration:none;pointer-events:none;cursor:text;overflow-wrap:anywhere;word-break:break-word}
+.md a{color:var(--ink);text-decoration:none;pointer-events:none;cursor:text;display:inline;overflow-wrap:anywhere;word-break:break-word}
 .md img{display:block;max-width:100%;height:auto;margin:10px auto 22px}
 .md td img{display:inline-block;max-width:180px;vertical-align:middle;margin:0}
 .md img.imgerr{min-height:64px;padding:20px 10px;font-size:12px;color:var(--ink-3)}
@@ -472,6 +472,7 @@ function inline(s){
   s=esc(s);
   s=s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(m,alt,src)=>
     '<img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.classList.add(\'imgerr\')">');
+  s=s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2">$1</a>');
   s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
   s=s.replace(/\*\*\*([^*]+)\*\*\*/g,'<strong><em>$1</em></strong>');
   s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
