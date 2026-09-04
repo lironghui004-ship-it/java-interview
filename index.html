@@ -354,7 +354,7 @@ DATA.forEach(d=>catCount[d.cat]=(catCount[d.cat]||0)+1);
 const srcCount={};
 DATA.forEach(d=>(d.srcs||[]).forEach(s=>srcCount[s]=(srcCount[s]||0)+1));
 const EXTRA_CATS=[...new Set(DATA.flatMap(d=>d.srcs||[]))]
-  .filter(s=>PRIMARY_DIRS.indexOf(s)<0)
+  .filter(s=>PRIMARY_DIRS.indexOf(s)<0 && CATS.indexOf(s)<0)
   .sort((a,b)=>(srcCount[b]||0)-(srcCount[a]||0));
 if(S.cat!=='all'){
   if(S.cat.indexOf('x:')===0){ if(EXTRA_CATS.indexOf(S.cat.slice(2))<0) S.cat='all'; }
@@ -384,7 +384,7 @@ function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g
 function inline(s){
   s=esc(s);
   s=s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,(m,alt,src)=>
-    '<img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async" onerror="this.classList.add(\'imgerr\')">');
+    '<img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.classList.add(\'imgerr\')">');
   s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
   s=s.replace(/\*\*\*([^*]+)\*\*\*/g,'<strong><em>$1</em></strong>');
   s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
