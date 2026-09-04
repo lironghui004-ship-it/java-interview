@@ -174,6 +174,8 @@ mark{background:var(--mark);color:var(--ink);padding:0 2px;border-bottom:2px das
 main{flex:1;min-height:0;padding:18px 22px 8px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .card{position:relative;background:var(--paper-3);border:1.5px dashed rgba(44,44,44,.5);box-shadow:var(--s1);
   width:100%;display:flex;flex-direction:column;min-height:0;margin-bottom:22px}
+#card.k{border-color:var(--ok)}
+#card.u{border-color:var(--no)}
 .cmeta{display:flex;align-items:center;gap:12px;padding:22px 24px 2px;flex:none}
 .badge{font-size:12.5px;padding:5px 12px;background:var(--paper-2);color:var(--ink);font-weight:700;
   border:1.5px dashed rgba(44,44,44,.4);box-shadow:var(--s1);transform:rotate(-1.6deg)}
@@ -691,6 +693,7 @@ function render(){
   $('q').textContent=d.q;
   const f=marks[cid(d)];
   $('qflag').innerHTML = f?('<span class="'+(f==='k'?'k':'u')+'">'+(f==='k'?'已掌握':'待攻克')+'</span>'):'';
+  const _c=$('card');_c.classList.toggle('k',f==='k');_c.classList.toggle('u',f==='u');
   $('okBtn').classList.toggle('on',f==='k');
   $('noBtn').classList.toggle('on',f==='u');
 
@@ -723,6 +726,7 @@ function mark(v){
   if(S.filter!=='all'){buildList();if(S.pos>=S.list.length)S.pos=Math.max(0,S.list.length-1);render();return}
   const f=marks[cid(d)];
   $('qflag').innerHTML = f?('<span class="'+(f==='k'?'k':'u')+'">'+(f==='k'?'已掌握':'待攻克')+'</span>'):'';
+  const _c=$('card');_c.classList.toggle('k',f==='k');_c.classList.toggle('u',f==='u');
   $('okBtn').classList.toggle('on',f==='k');
   $('noBtn').classList.toggle('on',f==='u');
   let kn=0,un=0;DATA.forEach(x=>{if(marks[cid(x)]==='k')kn++;else if(marks[cid(x)]==='u')un++});
